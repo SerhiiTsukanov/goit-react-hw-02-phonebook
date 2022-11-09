@@ -1,0 +1,30 @@
+import React from "react";
+import Contacts from "components/Contacts/Contacts";
+import { nanoid } from 'nanoid'
+
+class Phonebook extends React.Component {
+    state = {
+        contacts: [],
+        name: ''
+    }
+    
+    render() {
+        return (
+            <div>
+                <h1>Name</h1>
+                <input
+                    type="text"
+                    name="name"
+                    pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+                    title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+                    required
+                />
+                <button type="button">Add contact</button>
+                <Contacts/>
+            </div>
+        )
+    }
+
+}
+
+export default Phonebook;
