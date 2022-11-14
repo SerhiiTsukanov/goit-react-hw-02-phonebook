@@ -1,5 +1,5 @@
 import React from "react";
-
+import { nanoid } from 'nanoid';
 
 
 class Phonebook extends React.Component {
@@ -11,11 +11,11 @@ class Phonebook extends React.Component {
 
     
 
-    formSubmitHandler = e => {
-        e.preventDefault();
-        this.setState(this.state.contacts = this.state);
-        console.log(this.state.contacts);
-    };
+    // formSubmitHandler = e => {
+    //     e.preventDefault();
+    //     this.setState(this.state.contacts = this.state);
+        
+    // };
 
     handleChang = event => {
         console.log(event.currentTarget.value);
@@ -23,20 +23,26 @@ class Phonebook extends React.Component {
         this.setState({ [event.currentTarget.name]: event.currentTarget.value, });
     };
 
-    // handleSubmit = e => {
-    //     e.preventDefault();
-    //     this.props.onSubmit(this.state);
-    // };
+    handleSubmit = e => {
+        e.preventDefault();
+        
+        this.reset();
+    };
 
     reset = () => {
         this.setState({ name: '', number: '' });
     };
+
+
+formSubmitHandler = e => {
+    console.log(e);
+  };
     
     render() {
         return (
             <div>
                 
-                <form onSubmit={this.formSubmitHandler} action="">
+                <form onSubmit={this.handleSubmit}>
                     <label>Name
                         <input
                         type="text"
@@ -45,7 +51,9 @@ class Phonebook extends React.Component {
                         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                         required
                         value={this.state.name}
-                        onChange={this.handleChang}/>
+                        onChange={this.handleChang}
+                        id={nanoid()} />
+                        
                     </label>
                     <label>Number
                         <input
@@ -57,8 +65,17 @@ class Phonebook extends React.Component {
                             value={this.state.number}
                             onChange={this.handleChang} />
                     </label>
-                    <button type="button">Add contact</button></form>
+                    <button type="submit">Add contact</button>
+                </form>
+                <div onSubmit={this.formSubmitHandler}>
+                    <h2>Contacts</h2>
+                <ul>
+                    <li>
+                        {this.state.contacts}
+                    </li>
+                </ul>
                 
+            </div>
                 
             </div>
         )
